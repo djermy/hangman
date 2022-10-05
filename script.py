@@ -1,7 +1,34 @@
 import random
 import os
 
+# constants
+VALID_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+# rendering methods
+def print_chosen_word(word, letters_already_taken):
+    "for every letter in the chosen word, prints an underscore"
+    print("\n")
+    for letter in word:
+        if letter in letters_already_taken:
+            print(letter, end=" ")
+        else:
+            print("_", end=" ")
+    print("\n")
+
+def print_taken_letters(letters):
+    "prints letter's that have already been taken"
+    print("\n" + "Letters already taken: ")
+    for i in letters:
+        print(i.upper(), end=", ")
+
+# logic methods
+def take_user_input():
+    "takes user input and stores it"
+    letter = input("\n" + "\n" + "Choose a letter: ")
+    return letter.upper()
+
 def chosen_word():
+    "selects a random word from the words file"
     with open('words.txt', 'r') as f:
         allText = f.read()
         words = list(map(str, allText.split()))
@@ -10,35 +37,22 @@ def chosen_word():
         random_word = random.choice(words)
         return random_word
 
-
-def print_chosen_word(word):
-    print("\n")
-    for i in range(len(word)):
-        print("_", end=" ")
-
-def take_user_input(letters):
-    letter = input("\n" + "\n" + "Choose a letter: ")
-    letters.append(letter.lower())
-
-def print_taken_letters(letters):
-    print("\n" + "Letters already taken: ")
-    for i in letters:
-        print(i.upper() + ",", end=" ")
-
-def letter_in_word(word, letters):
-    if letters[-1] in word:
-        return True
-
+# main loop and state
 def main():
+    # state
     letters_already_taken = []
-    word = chosen_word()
+    word = chosen_word().upper()
 
+    # game loop
     while True:
-        chosen_word()
-        print_chosen_word(chosen_word())
-        take_user_input(letters_already_taken)
+        # rendering
         os.system('cls' if os.name == 'nt' else 'clear')
+        print_chosen_word(word, letters_already_taken)
         print_taken_letters(letters_already_taken)
+
+        # logic
+        letter = take_user_input()
+        letters_already_taken.append(letter)
 
 if __name__ == "__main__":    
     main()
