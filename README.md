@@ -1,6 +1,7 @@
 # Hangman
 A terminal based, single player game of hangman, written in Python.
-Note! included is an example list of words. you can use any list of words by editing **words.txt**.
+
+**Note:** included is an example list of words. you can use any list of words by editing `words.txt`.
 
 ## How to run
 To play the game, first clone this repository, open a terminal, and navigate to the repository location, then run:
